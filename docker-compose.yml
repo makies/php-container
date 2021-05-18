@@ -1,0 +1,7 @@
+version: '3'
+services:
+    php:
+        build: ./app1
+        container_name: "larara-app1"
+        volumes:
+            - "./app1/src:/var/www/html"
