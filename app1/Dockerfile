@@ -3,7 +3,7 @@ FROM php:8-apache
 
 RUN apt update
 
-RUN apt install -y git zip unzip libzip-dev zlib1g-dev default-mysql-client
+RUN apt install -y vim git zip unzip libzip-dev zlib1g-dev default-mysql-client
 RUN git --version
 
 #RUN apt install -y zip
@@ -23,5 +23,8 @@ RUN docker-php-ext-install pdo_mysql
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+RUN sed -i -e 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-enabled/000-default.conf
+RUN a2enmod rewrite
 
-ADD index.php /var/www/html/index.php
+
+ADD ./src /var/www/html

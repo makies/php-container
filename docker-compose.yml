@@ -1,7 +1,13 @@
 version: '3'
 services:
-    php:
+    app1:
         build: ./app1
         container_name: "larara-app1"
         volumes:
             - "./app1/src:/var/www/html"
+        ports: 
+            - 81:80
+        networks:
+            - larara
+networks: 
+    larara:
